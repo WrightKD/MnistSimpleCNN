@@ -38,11 +38,23 @@ class MnistDataset(torch.utils.data.Dataset):
         ys = ys.astype(np.int)
         print(xs[0].shape)
         print(ys[0].shape)
-        
+
         (x_train, y_train) = self.mnist_extract_data("/kaggle/input/bbd-digit-recognizer/train.csv")
         x_train = x_train.astype("float32") / 255.0
-        self.x_data = x_train
-        self.y_data = y_train
+
+        batch_size = int(0.10 * len(x_train))
+
+        # TODO : Add one-hot-encodding
+
+        if training:
+            xt = x_train[batch_size:]
+            yt = y_train[batch_size:]
+        else:
+            xt = x_train[:batch_size]
+            yt = y_train[:batch_size]
+
+        self.x_data = xt
+        self.y_data = yt
         self.transform = transform
 
     def __len__(self):
@@ -98,6 +110,5 @@ class MnistDataset(torch.utils.data.Dataset):
                 else:
                     x = np.concatenate((x, x_keras_test))
                     y = np.concatenate((x, y_keras_test))
-
-        print(f'Data Count {len(x)}. Same {x_count_same}')           
+         
         return x, y
