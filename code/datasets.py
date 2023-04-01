@@ -53,7 +53,7 @@ class MnistDataset(torch.utils.data.Dataset):
         x = transforms.ToTensor()(np.array(x)/255)
         return x, y
     
-    def mnist_extract_data(file, is_train=True, include_keras_dataset=False):
+    def mnist_extract_data(self, file, is_train=True, include_keras_dataset=False):
     
         x_values = []
         y_values = []
