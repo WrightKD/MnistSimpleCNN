@@ -36,8 +36,8 @@ class MnistDataset(torch.utils.data.Dataset):
             f.close()
         xs = np.reshape(xs, (-1, 28, 28, 1)).astype(np.float32)
         ys = ys.astype(np.int)
-        print(xs[0:5])
-        print(ys[0:5])
+        print(xs[0:1])
+        print(ys[0:1])
         
         (x_train, y_train) = self.mnist_extract_data("/kaggle/input/bbd-digit-recognizer/train.csv")
         self.x_data = x_train
